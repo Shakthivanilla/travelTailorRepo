@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .response-content {
+            white-space: pre-wrap; /* Preserve whitespace formatting */
+            font-family: 'Courier New', Courier, monospace;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: #fafafa;
+            border-radius: 4px;
+            line-height: 1.5;
+        }
+
+        /* Add styling to make the text look cleaner */
+        .paragraph {
+            margin-bottom: 1.5em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Hotel Recommendations</h1>
+    <div id="responseContent" class="response-content"></div>
+</div>
+
+<script>
+    // Function to get URL parameters
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Get the response text from the URL parameters and display it
+    document.addEventListener("DOMContentLoaded", () => {
+        const responseContent = document.getElementById("responseContent");
+        const responseText = getQueryParam('response');
+        if (responseText) {
+            // Process responseText to preserve line breaks and spacing
+            // Replace newlines with <p> tags for better formatting
+            const formattedText = responseText
+                .split('\n\n') // Double newlines for paragraphs
+                .map(paragraph => `<div class="paragraph">${paragraph.replace(/\n/g, '<br>')}</div>`)
+                .join('');
+            responseContent.innerHTML = formattedText;
+        } else {
+            responseContent.textContent = "No response available.";
+        }
+    });
+</script>
+</body>
+</html>

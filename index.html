@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .form-group {
+            display: flex; /* Enable flexbox layout */
+            margin-bottom: 10px; /* Add some spacing between groups */
+        }
+
+        .form-group label {
+            flex: 0 0 20%; /* Allocate fixed width for label (adjust as needed) */
+            margin-right: 10px; /* Add spacing between label and input */
+            text-align: right; /* Align label text to the right */
+        }
+
+        .form-group input {
+            flex: 1; /* Allow input to fill remaining space */
+        }
+    </style>
+    <script type="importmap">
+        {
+          "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          }
+        }
+    </script>
+    
+
+    <meta charset="utf-8"/>
+    <title>Distances btn two cities App</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://kit.fontawesome.com/ab2155e76b.js"  
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">  
+
+    <link href="App.css" rel="stylesheet"/>
+</head>
+<body>
+
+
+<div  
+     class="jumbotron">
+    <div class="container-fluid">
+        <h1>Travel Tailor</h1>
+        <p>Get Recommendations, Share your travel itenary.</p>  
+
+        <div id="input-container">
+            <div class="form-group">
+                <label for="place1" class="col-xs-2 control-label"><i class="fas fa-map-marker-alt"></i> </label>
+                <div class="col-xs-4">
+                    <input type="text" id="place1" placeholder="Origin" class="form-control">
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="place2" class="col-xs-2 control-label"><i class="fas fa-map-marker-alt"></i> </label>
+                <div class="col-xs-4">
+                    <input type="text" id="place2" placeholder="Destination" class="form-control">
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                <label for="but1" class="col-xs-2 control-label"><i class="fas fa-map-marker-alt"></i></label>
+                <div class="col-xs-4">
+                    <button id= "but1" type="button" onclick="addInput()">Add Destination</button>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div>
+            <div class="form-group">
+                <label for="place1" class="col-xs-2 control-label"><i class="fas fa-map-marker-alt"></i> </label>
+                <div class="col-xs-10 control-label">
+                    <button id="hotel">
+                        Hotel recommendation
+                        (wait for response)
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="place1" class="col-xs-2 control-label"><i class="fas fa-map-marker-alt"></i> </label>
+                <div class="col-xs-10 control-label">
+                    <button id="travelitenary">
+                        Get Travel Itenary
+                        (wait for response)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div>
+
+            <div class="col-xs-offset-2 col-xs-10">
+                <button class="btn btn-info btn-lg " onclick="calcRoute();"><i class="fas fa-map-signs"></i>
+                </button>
+            </div>
+
+        </div>
+
+
+    </div>  
+
+    <div class="container-fluid">
+        <div id="googleMap">
+
+        </div>
+        <div id="output">
+            <div class="col-xs-offset-2 col-xs-10">
+                <button id="directionsLink" href="#"  onclick="openDirections();">
+                    Copy Gmaps Plan Link to Share
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=[REPLACE WITH YOU GOOGLE MAPS API KEY]]&libraries=places"></script>  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="Scripts/jquery-3.1.1.min.js"></script>
+<script src="Main.js"></script>
+<script type="module" src="script.js"></script>
+
+
+
+</body>
+</html>
