@@ -133,56 +133,7 @@ function openDirections() {
     // Optionally display a message to the user
 
 
-    /*navigator.clipboard.writeText(url)
-        .then(() => {
-            console.log("URL copied to clipboard!");
-            const inputContainer = document.getElementById('output');
-            const flashMessage = document.createElement('div');
-            flashMessage.textContent = 'URL copied!';
-            flashMessage.classList.add('flash-message');
-            inputContainer.appendChild(flashMessage);
-
-            // Remove the flash message after 2 seconds
-            setTimeout(() => {
-                flashMessage.remove();
-            }, 2000);
-            // Optionally display a message to the user
-        })
-        .catch(err => {
-            console.error("Failed to copy URL:", err);
-            // Handle potential errors (e.g., clipboard permissions)
-        });*/
-}
-/*function sample() {
-    var chennai = new google.maps.LatLng(-33.8665433,151.1956316);
-
-    var map = new google.maps.Map(document.getElementById('googleMap'), {
-        center: chennai,
-        zoom: 15
-    });
-
-    var request = {
-        location: chennai,
-        radius: '500',
-        type: ['lodging']
-    };
-
-    var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(request, callback);
-}*/
-
-/*function callback(results, status) {
-    console.log(results);
-
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
-        }
-    }
-}*/
-
-
-
+    
 //create autocomplete objects for all inputs
 var options = {
     types: ['(cities)']
@@ -212,6 +163,42 @@ function createWaypoints(inputCount) {
     }
     return waypoints;
 }
+function restoreState() {
 
+    console.log('I am different '+window.inputCount);
+    const dests = localStorage.getItem('global');
+    if(dests > 2){
+        for (let i = 3; i <= dests; i++) {
+            addInput();
+        }
+    }
+    for (let i = 1; i <= inputCount; i++) {
+        const savedValue = localStorage.getItem('place' + i);
+        const input = document.getElementById('place' + i);
+        if (savedValue) {
+            input.value = savedValue;
+        }
+    }
+}
+
+window.onload = restoreState
+
+document.getElementById('hotel').addEventListener('click', function() {
+    for (let i = 1; i <= window.inputCount; i++) {
+        const input = document.getElementById('place' + i);
+        if (input) {
+            localStorage.setItem('place' + i, input.value);
+        }
+    }
+    localStorage.setItem('global', window.inputCount);
+    console.log('setting global'+ localStorage.getItem('global'));
+});
+
+
+// Optionally, handle initial page load
+window.addEventListener('load', () => {
+    console.log('Page loaded or refreshed. '+localStorage.getItem('global'));
+
+});
 
 
