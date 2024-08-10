@@ -165,14 +165,20 @@ function createWaypoints(inputCount) {
 }
 function restoreState() {
 
-    console.log('I am different '+window.inputCount);
-    const dests = localStorage.getItem('global');
+    const loc1 = localStorage.getItem('global');
+    const loc2 = localStorage.getItem('itenary');
+    let dests = window.inputCount;
+    if(loc1 > 2){
+        dests = loc1;
+    }else if(loc2 > 2){
+        dests = loc2;
+    }
     if(dests > 2){
         for (let i = 3; i <= dests; i++) {
             addInput();
         }
     }
-    for (let i = 1; i <= inputCount; i++) {
+    for (let i = 1; i <= dests; i++) {
         const savedValue = localStorage.getItem('place' + i);
         const input = document.getElementById('place' + i);
         if (savedValue) {
@@ -192,6 +198,20 @@ document.getElementById('hotel').addEventListener('click', function() {
     }
     localStorage.setItem('global', window.inputCount);
     console.log('setting global'+ localStorage.getItem('global'));
+});
+
+document.getElementById('travelitenary').addEventListener('click', function() {
+    if (!localStorage.getItem('global')) {
+
+    for (let i = 1; i <= window.inputCount; i++) {
+        const input = document.getElementById('place' + i);
+        if (input) {
+            localStorage.setItem('place' + i, input.value);
+        }
+    }
+    localStorage.setItem('itenary', window.inputCount);
+    console.log('setting itenary' + localStorage.getItem('itenary'));
+}
 });
 
 
